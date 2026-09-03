@@ -170,7 +170,7 @@ const photos = [
   ,{
     "src": "assets/photos/field-29.jpg",
     "thumb": "assets/photos/thumbs/field-29.jpg",
-    "caption": "On-site network technician working alongside active switching infrastructure and rack-level cabling.",
+    "caption": "On-site network infrastructure work alongside active switching equipment and rack-level cabling.",
     "category": "switching"
   }
 ];
