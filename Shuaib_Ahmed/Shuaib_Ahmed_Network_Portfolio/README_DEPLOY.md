@@ -14,7 +14,7 @@ For local editing at `http://127.0.0.1:4173/admin/`, run `$env:BIND_HOST='127.0.
 4. Open `https://shuaibahmedportfolio.netlify.app/admin/` and sign in with a GitHub account that has push access to the repository.
 5. Open **Writing > Blog posts**, add a post with a unique lowercase URL slug, date, summary, optional comma-separated custom tags, and article text, then publish. Posts display on the homepage and at `/blog.html` after Netlify deploys the commit.
 
-Tags appear automatically in the **Filter by tag** menu on the full blog page. Reuse the same tag name on multiple posts to group them; capitalization differences are treated as the same tag. Older posts without tags continue to appear under **All posts**.
+Tags appear automatically in the **Filter by tag** menu on the full blog page. Enter readable names with spaces rather than URL-style slugs. Reuse the same tag name on multiple posts to group them; capitalization differences are treated as the same tag. Older posts without tags continue to appear under **All posts**.
 
 Only enter content ready to be public. The blog data file is served with the static site.
 
