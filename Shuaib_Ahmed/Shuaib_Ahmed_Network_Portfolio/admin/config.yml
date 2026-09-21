@@ -1,0 +1,34 @@
+local_backend: true
+
+backend:
+  name: github
+  repo: faraz176/Shuaib_Ahmed_Portfolio_Site
+  branch: main
+  site_domain: shuaibahmedportfolio.netlify.app
+
+media_folder: Shuaib_Ahmed/Shuaib_Ahmed_Network_Portfolio/assets/blog
+public_folder: /assets/blog
+
+collections:
+  - name: writing
+    label: Writing
+    editor:
+      preview: false
+    files:
+      - name: posts
+        label: Blog posts
+        file: Shuaib_Ahmed/Shuaib_Ahmed_Network_Portfolio/data/posts.json
+        format: json
+        fields:
+          - name: posts
+            label: Posts
+            widget: list
+            default: []
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: slug, label: URL slug, widget: string, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and hyphens'] }
+              - { name: date, label: Date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD }
+              - { name: summary, label: Summary, widget: text }
+              - { name: tags, label: Tags, widget: list, required: false, default: [], hint: 'Enter custom tags separated by commas. Reuse a tag name to group posts.' }
+              - { name: body, label: Article, widget: text }
