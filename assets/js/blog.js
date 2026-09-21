@@ -4,8 +4,16 @@ const article = document.querySelector('[data-blog-article]');
 const filters = document.querySelector('[data-blog-filters]');
 const tagSelect = document.querySelector('[data-blog-tag-filter]');
 
+function displayTag(tag) {
+  const name = tag.trim().replace(/\s+/g, ' ');
+  if (name.includes('_') || /^[a-z0-9]+(?:-[a-z0-9]+)+$/.test(name)) {
+    return name.replace(/[_-]+/g, ' ').replace(/(^| )([a-z])/g, (_, space, letter) => space + letter.toUpperCase());
+  }
+  return name;
+}
+
 function tagKey(tag) {
-  return tag.toLocaleLowerCase('en-US');
+  return displayTag(tag).toLocaleLowerCase('en-US');
 }
 
 function normalizeTags(value) {
@@ -13,7 +21,7 @@ function normalizeTags(value) {
   const tags = new Map();
   value.forEach(raw => {
     if (typeof raw !== 'string') return;
-    const tag = raw.trim().replace(/\s+/g, ' ');
+    const tag = displayTag(raw);
     if (tag && !tags.has(tagKey(tag))) tags.set(tagKey(tag), tag);
   });
   return [...tags.values()];
@@ -78,22 +86,17 @@ function renderList(container, posts, limit = posts.length) {
 function renderFilters(posts) {
   if (!filters || !tagSelect || !list) return renderList(list, posts);
   const tags = new Map();
-  posts.forEach(post => post.tags.forEach(tag => {
-    const key = tagKey(tag);
-    const entry = tags.get(key);
-    if (entry) entry.count += 1;
-    else tags.set(key, { name: tag, count: 1 });
-  }));
+  posts.forEach(post => post.tags.forEach(tag => tags.set(tagKey(tag), tag)));
   filters.hidden = tags.size === 0;
   tagSelect.replaceChildren();
   const all = document.createElement('option');
   all.value = '';
-  all.textContent = `All posts (${posts.length})`;
+  all.textContent = 'All posts';
   tagSelect.append(all);
-  [...tags.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name)).forEach(([key, tag]) => {
+  [...tags.entries()].sort((a, b) => a[1].localeCompare(b[1])).forEach(([key, tag]) => {
     const option = document.createElement('option');
     option.value = key;
-    option.textContent = `${tag.name} (${tag.count})`;
+    option.textContent = tag;
     tagSelect.append(option);
   });
   const requested = new URLSearchParams(location.search).get('tag');
@@ -103,7 +106,7 @@ function renderFilters(posts) {
     : posts);
   tagSelect.addEventListener('change', () => {
     const url = new URL(location.href);
-    if (tagSelect.value) url.searchParams.set('tag', tags.get(tagSelect.value).name);
+    if (tagSelect.value) url.searchParams.set('tag', tags.get(tagSelect.value));
     else url.searchParams.delete('tag');
     history.replaceState(null, '', url);
     showSelected();
