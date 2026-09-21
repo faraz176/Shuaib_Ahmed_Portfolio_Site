@@ -1,4 +1,6 @@
 local_backend: true
+site_url: https://shuaibahmedportfolio.netlify.app/
+display_url: https://shuaibahmedportfolio.netlify.app/
 
 backend:
   name: github
