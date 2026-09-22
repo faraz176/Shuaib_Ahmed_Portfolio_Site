@@ -146,7 +146,8 @@ function renderArticle(post) {
   comments.append(commentsHeading, commentsNote);
   article.replaceChildren(back, date, heading, summary);
   if (post.tags.length) article.append(tagLinks(post.tags));
-  article.append(body, comments);
+  if (post.body.trim()) article.append(body);
+  article.append(comments);
   document.title = `${post.title} | Shuaib Ahmed`;
 
   if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(post.slug)) {
@@ -167,8 +168,8 @@ async function loadPosts() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     const posts = (Array.isArray(data.posts) ? data.posts : [])
-      .filter(post => post && typeof post.title === 'string' && typeof post.slug === 'string' && typeof post.date === 'string' && typeof post.summary === 'string' && typeof post.body === 'string')
-      .map(post => ({ ...post, tags: normalizeTags(post.tags) }))
+      .filter(post => post && typeof post.title === 'string' && typeof post.slug === 'string' && typeof post.date === 'string' && typeof post.summary === 'string')
+      .map(post => ({ ...post, body: typeof post.body === 'string' ? post.body : '', tags: normalizeTags(post.tags) }))
       .sort((a, b) => b.date.localeCompare(a.date));
     renderList(preview, posts, 3);
     const slug = new URLSearchParams(location.search).get('post');
