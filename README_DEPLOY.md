@@ -12,7 +12,7 @@ For local editing at `http://127.0.0.1:4173/admin/`, run `$env:BIND_HOST='127.0.
 2. In GitHub, create an OAuth App for this site. Set its authorization callback URL to `https://api.netlify.com/auth/done`.
 3. In Netlify, open **Project configuration > Security > OAuth**, install the GitHub provider, and enter the OAuth App client ID and secret there. Never put the secret in this repository.
 4. Open `https://shuaibahmedportfolio.netlify.app/admin/` and sign in with a GitHub account that has push access to the repository.
-5. Open **Writing > Blog posts**, add a post with a title, date, summary, optional comma-separated custom tags, and article text, then publish. The URL is generated automatically from the title when the post is first saved and remains stable if the title changes later. Posts display on the homepage and at `/blog.html` after Netlify deploys the commit.
+5. Open **Writing > Blog posts**, add a post with a title and text, optional tags and article body, then publish. The date starts at today but can be changed. The URL is generated automatically from the title when the post is first saved and remains stable if the title changes later. Posts display on the homepage and at `/blog.html` after Netlify deploys the commit.
 
 Tags appear automatically in the **Filter by tag** menu on the full blog page. Enter readable names with spaces rather than URL-style slugs. Reuse the same tag name on multiple posts to group them; capitalization differences are treated as the same tag. Older posts without tags continue to appear under **All posts**.
 
