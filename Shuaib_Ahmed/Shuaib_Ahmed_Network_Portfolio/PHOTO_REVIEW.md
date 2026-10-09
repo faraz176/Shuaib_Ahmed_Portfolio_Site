@@ -30,6 +30,13 @@
 - IMG_EB891DA3-9119-440B-A742-506D35BA01DA.jpeg
 - IMG_F65AC615-826B-461F-8AE8-4ABD5FD8E529.jpeg
 - IMG_FE391E84-9D4C-4601-9E81-9CC0B6375D45.jpeg
+- 36e80eb9-9221-4e69-9fd9-669532ec2ecd.jpeg
+- IMG_8448.jpeg
+- IMG_8449.jpeg
+- IMG_8450.jpeg
+- IMG_8545.jpeg
+- IMG_8546.jpeg
+- IMG_8547.jpeg
 
 ## Excluded from the public gallery
 - IMG_15E45764-BB13-490D-868E-A1A4EBDE947B.jpeg
@@ -53,5 +60,13 @@
 - IMG_5842.JPG
 - IMG_5896.JPEG
 - IMG_B32182C6-6375-453E-BDEE-462CA99A353C.jpeg
+- IMG_8451.jpeg
+- IMG_8452.jpeg
+- IMG_8453.jpeg
+- IMG_8454.jpeg
+- IMG_8455.jpeg
+- IMG_8544.jpeg
+- IMG_8548.jpeg
+- IMG_8550.jpeg
 
 The excluded set contains images with client-identifying context, visible device interfaces, labels, serial information, duplicate angles, or weak portfolio value. IMG_5785.JPEG was intentionally added to the public gallery at the owner’s request.

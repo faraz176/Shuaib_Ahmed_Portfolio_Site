@@ -1,9 +1,9 @@
-const photos = Array.from({ length: 29 }, (_, index) => {
+const photos = Array.from({ length: 36 }, (_, index) => {
   const number = String(index + 1).padStart(2, '0');
   return {
     src: `assets/photos/field-${number}.jpg`,
     thumb: `assets/photos/thumbs/field-${number}.jpg`,
-    label: `Field work photo ${index + 1} of 29`
+    label: `Field work photo ${index + 1} of 36`
   };
 });
 
