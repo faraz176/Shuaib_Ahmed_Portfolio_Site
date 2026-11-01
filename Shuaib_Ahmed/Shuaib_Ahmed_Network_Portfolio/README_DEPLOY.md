@@ -5,7 +5,7 @@ The portfolio is a static site. Serve this folder locally to preview it, or depl
 ## Site structure
 
 - `index.html`: homepage, credentials, labs, TopoDrawer, and field photo carousel
-- `assets/docs/Shuaib_Ahmed_Resume.pdf`: sole resume, supplied September 21, 2026
+- `assets/docs/Shuaib_Ahmed_Resume.pdf`: sole resume, updated November 1, 2026
 - `assets/photos/`: curated gallery photos with EXIF metadata stripped
 - `assets/video/preferred.mp4`: TopoDrawer walkthrough
 - `labs/`: technical lab reports
