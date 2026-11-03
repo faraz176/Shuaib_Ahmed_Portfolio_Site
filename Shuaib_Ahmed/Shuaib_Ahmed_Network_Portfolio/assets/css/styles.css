@@ -118,6 +118,14 @@ h1 { font-size:clamp(3.3rem, 8vw, 6.7rem); line-height:1; letter-spacing:0; marg
 .info-table { width:100%; border-collapse:collapse; margin-top:13px; }
 .info-table th,.info-table td { border-bottom:1px solid var(--line); text-align:left; vertical-align:top; padding:10px 0; font-size:.9rem; }
 .info-table th { color:#d9ecff; width:38%; } .info-table td { color:var(--muted); }
+.card p + p { margin-top:12px; }
+.detail-grid > article { min-width:0; }
+.table-scroll { overflow-x:auto; margin-top:13px; }
+.data-table { width:100%; min-width:560px; border-collapse:collapse; }
+.data-table th,.data-table td { border-bottom:1px solid var(--line); text-align:left; vertical-align:top; padding:10px 12px 10px 0; font-size:.88rem; }
+.data-table th { color:#d9ecff; } .data-table td { color:var(--muted); }
+.figure-portrait { background:#0a1828; }
+.figure-portrait img { width:auto; max-height:760px; margin:0 auto; }
 @media(max-width:1120px){
   .cert-grid{grid-template-columns:repeat(3,1fr)}
 }
