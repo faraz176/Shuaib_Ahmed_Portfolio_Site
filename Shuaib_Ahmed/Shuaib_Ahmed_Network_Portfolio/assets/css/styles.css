@@ -118,19 +118,19 @@ h1 { font-size:clamp(3.3rem, 8vw, 6.7rem); line-height:1; letter-spacing:0; marg
 .info-table { width:100%; border-collapse:collapse; margin-top:13px; }
 .info-table th,.info-table td { border-bottom:1px solid var(--line); text-align:left; vertical-align:top; padding:10px 0; font-size:.9rem; }
 .info-table th { color:#d9ecff; width:38%; } .info-table td { color:var(--muted); }
-.card p + p { margin-top:12px; }
 .detail-grid > article { min-width:0; }
-.table-scroll { overflow-x:auto; margin-top:13px; }
-.data-table { width:100%; min-width:560px; border-collapse:collapse; }
-.data-table th,.data-table td { border-bottom:1px solid var(--line); text-align:left; vertical-align:top; padding:10px 12px 10px 0; font-size:.88rem; }
-.data-table th { color:#d9ecff; } .data-table td { color:var(--muted); }
+.detail-grid > article > .figure:first-child { margin-top:0; }
+.figure figcaption strong { color:var(--text); }
+.figure-pair { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+.figure-pair .figure { margin:0; }
+.figure-pair .figure img { aspect-ratio:16/9; object-fit:cover; }
 .figure-portrait { background:#0a1828; }
 .figure-portrait img { width:auto; max-height:760px; margin:0 auto; }
 @media(max-width:1120px){
   .cert-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:900px){
-  .nav-links a:not(.nav-cta){display:none}.hero{min-height:calc(100svh - 150px)}.project,.detail-grid{grid-template-columns:1fr}.cert-grid{grid-template-columns:repeat(2,1fr)}.lab-grid{grid-template-columns:1fr}.detail-sidebar{position:static}.photo-card{flex-basis:270px;height:350px}
+  .nav-links a:not(.nav-cta){display:none}.hero{min-height:calc(100svh - 150px)}.project,.detail-grid,.figure-pair{grid-template-columns:1fr}.cert-grid{grid-template-columns:repeat(2,1fr)}.lab-grid{grid-template-columns:1fr}.detail-sidebar{position:static}.photo-card{flex-basis:270px;height:350px}
 }
 @media(max-width:560px){
   .container{width:min(100% - 24px,var(--max))}.hero{min-height:auto}.hero-content{padding:36px 0 32px}.hero-role{font-size:1.12rem}.hero .hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.hero .hero-actions .btn{min-height:52px;padding:8px;font-size:.86rem}.section{padding:68px 0}.photo-card{flex-basis:245px;height:320px}.cert-grid{grid-template-columns:1fr}.footer-inner{flex-direction:column}.contact .hero-actions .btn{width:100%}
