@@ -61,6 +61,21 @@ with sync_playwright() as pw:
  dur=pg.evaluate('Math.max(probe.visual,probe.audio,probe.vib)-Math.min(probe.visual,probe.audio,probe.vib)')
  assert dur<200 and pg.evaluate('probe.duration')==30,dur
  result['cue_dispatch_ms']=round(dur,2)
+ # Read the actual ink bounds as the lemon moves. The wisp should flatten;
+ # changing only the caption would never produce the narrower silhouette.
+ shapes=pg.locator('[data-lemon-canvas]').evaluate("""c=>new Promise(done=>{
+   const history={},ctx=c.getContext('2d');
+   function sample(){let form=c.dataset.form;
+     if(form&&!history[form]){
+       const {data}=ctx.getImageData(0,0,c.width,c.height);let x0=c.width,x1=0,y0=c.height,y1=0;
+       for(let y=0;y<c.height;y+=2)for(let x=0;x<c.width;x+=2){
+         const i=(y*c.width+x)*4;if(data[i]+data[i+1]+data[i+2]<85)continue;
+         x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);}
+       history[form]=(y1-y0)/Math.max(1,x1-x0);}
+     if(c.dataset.phase==='rest')done(history);else requestAnimationFrame(sample);}
+   sample();})""")
+ assert all(k in shapes for k in ['STARBURST','BLOB','DIAMOND','WISP','REFORMED']) and shapes['WISP']<shapes['DIAMOND']*.88,shapes
+ result['fluid_forms']=list(shapes)
  pg.wait_for_function('document.querySelector("[data-fruit-state]").textContent==="REFORMED"',timeout=5000)
  if O: pg.locator('.lemon-grid').screenshot(path=str(O/'lemon-study.png'))
  pg.goto(base+'/smell-test.html',wait_until='load');assert pg.locator('h1').inner_text().endswith('LEMON')
@@ -73,6 +88,17 @@ with sync_playwright() as pw:
  pg.goto(base+'/',wait_until='load');pg.wait_for_selector('[data-studio-controls]:visible');rig.scroll_into_view_if_needed()
  v=pc.evaluate('c=>c.toDataURL()');pg.wait_for_timeout(350);assert pc.evaluate('c=>c.toDataURL()')==v
  if O: rig.screenshot(path=str(O/'particle-portrait-hero.png'))
+ pg.locator('[data-mode=waveform]').click()
+ bands=pc.evaluate("""c=>{const a=c.getContext('2d').getImageData(0,0,c.width,c.height).data;
+   const pink=[0,0,0],blue=[0,0,0],eyes=[0,0,0];
+   for(let i=0;i<a.length;i+=4){let r=a[i],g=a[i+1],b=a[i+2],k=Math.min(2,Math.floor(i*3/a.length));
+     if(r>85&&r>g*1.55&&b>r*.40&&b<r*1.1)pink[k]++;
+     if(b>40&&b>r*1.5)blue[k]++;if(r>80&&r>g*1.7&&r>b*2.2)eyes[k]++;}
+   return {pink,blue,eyes};}""")
+ assert min(bands['pink'])>15 and sum(bands['blue'])>20 and sum(bands['eyes'])>2,bands
+ result['full_frame_waveform']=True
+ fixed=pc.evaluate('c=>c.toDataURL()');pg.wait_for_timeout(250);assert pc.evaluate('c=>c.toDataURL()')==fixed
+ if O: rig.screenshot(path=str(O/'waveform-portrait.png'))
  for width in [320,390,768,1024,1440]:
   pg.set_viewport_size({'width':width,'height':900});pg.wait_for_timeout(60)
   assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
