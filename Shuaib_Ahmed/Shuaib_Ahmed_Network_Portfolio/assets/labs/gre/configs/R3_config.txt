@@ -1,0 +1,12 @@
+hostname R3
+!
+interface GigabitEthernet0/0
+ ip address 192.168.13.2 255.255.255.252
+ no shutdown
+!
+interface GigabitEthernet0/1
+ ip address 192.168.23.1 255.255.255.252
+ no shutdown
+!
+ip route 192.168.1.0 255.255.255.0 192.168.13.1
+ip route 192.168.2.0 255.255.255.0 192.168.23.2

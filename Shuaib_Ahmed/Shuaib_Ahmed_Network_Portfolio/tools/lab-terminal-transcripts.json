@@ -1,0 +1,979 @@
+{
+  "labs/gre/screenshots/01_route_to_remote_lan_via_underlay.png": {
+    "title": "R1 / route before rewrite",
+    "lines": [
+      "R1#show ip route 192.168.2.0",
+      "Routing entry for 192.168.2.0/24",
+      "  Known via \"static\", distance 1, metric 0",
+      "  Routing Descriptor Blocks:",
+      "  * 172.16.12.2",
+      "      Route metric is 0, traffic share count is 1"
+    ],
+    "sha256": "5690f81f097f84dbd9d4406ecb3071bff8371029e4ff180aab36bd9f9881d6e2"
+  },
+  "labs/gre/screenshots/02_route_to_remote_lan_via_tunnel0.png": {
+    "title": "R1 / route via Tunnel0",
+    "lines": [
+      "Routing entry for 192.168.2.0/24",
+      "  Known via \"static\", distance 1, metric 0 (connected)",
+      "  Routing Descriptor Blocks:",
+      "  * directly connected, via Tunnel0",
+      "      Route metric is 0, traffic share count is 1",
+      "R1#"
+    ],
+    "sha256": "5ee6694439ffdc3757c7e93f946edf1c9562223ac5b255671591fbf05001c1ea"
+  },
+  "labs/gre/screenshots/05_r1_tunnel_counters_before.png": {
+    "title": "R1 / Tunnel0 before traffic",
+    "lines": [
+      "R1#show interfaces tunnel0",
+      "Tunnel0 is up, line protocol is up",
+      "  Hardware is Tunnel",
+      "  Internet address is 172.16.12.1/30",
+      "  Encapsulation TUNNEL, loopback not set",
+      "  Tunnel source 192.168.13.1, destination 192.168.23.2",
+      "  Tunnel protocol/transport GRE/IP",
+      "  Tunnel transport MTU 1476 bytes",
+      "  [...]",
+      "  10 packets input, 1240 bytes, 0 no buffer",
+      "  0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort",
+      "  10 packets output, 1240 bytes, 0 underruns",
+      "  0 output errors, 0 collisions, 0 interface resets"
+    ],
+    "sha256": "e407c7b158710cbf6f07be2430aee54f164e4bd143a1056365e5a178c6d3b582"
+  },
+  "labs/gre/screenshots/07_r1_tunnel_counters_after.png": {
+    "title": "R1 / Tunnel0 after traffic",
+    "lines": [
+      "R1#show interfaces tunnel0",
+      "Tunnel0 is up, line protocol is up",
+      "  Hardware is Tunnel",
+      "  Internet address is 172.16.12.1/30",
+      "  Encapsulation TUNNEL, loopback not set",
+      "  Tunnel source 192.168.13.1, destination 192.168.23.2",
+      "  Tunnel protocol/transport GRE/IP",
+      "  Tunnel transport MTU 1476 bytes",
+      "  [...]",
+      "  33 packets input, 3724 bytes, 0 no buffer",
+      "  0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort",
+      "  33 packets output, 3724 bytes, 0 underruns",
+      "  0 output errors, 0 collisions, 0 interface resets"
+    ],
+    "sha256": "833e5a5036023c3e9b79d5c2e575377b607565e62ce960a3d938a2d5bdac701e"
+  },
+  "labs/gre/screenshots/03_pc1_to_pc2_ping.png": {
+    "title": "Linux endpoint / ICMP exchange",
+    "lines": [
+      "PING 192.168.2.10 (192.168.2.10): 56 data bytes",
+      "64 bytes from 192.168.2.10: seq=0 ttl=42 time=10.761 ms",
+      "64 bytes from 192.168.2.10: seq=1 ttl=42 time=4.561 ms",
+      "64 bytes from 192.168.2.10: seq=2 ttl=42 time=11.922 ms",
+      "64 bytes from 192.168.2.10: seq=3 ttl=42 time=10.992 ms",
+      "64 bytes from 192.168.2.10: seq=4 ttl=42 time=10.224 ms",
+      "64 bytes from 192.168.2.10: seq=5 ttl=42 time=11.082 ms",
+      "[...]"
+    ],
+    "sha256": "1f906f6d2a32900657a94c511ab6f7d24a1e6636faafd11c95cbbbe012d2e895"
+  },
+  "labs/gre/screenshots/04_pc2_to_pc1_ping.png": {
+    "title": "Linux endpoint / ICMP exchange",
+    "lines": [
+      "PING 192.168.1.10 (192.168.1.10): 56 data bytes",
+      "64 bytes from 192.168.1.10: seq=0 ttl=42 time=5.352 ms",
+      "64 bytes from 192.168.1.10: seq=1 ttl=42 time=4.178 ms",
+      "64 bytes from 192.168.1.10: seq=2 ttl=42 time=8.600 ms",
+      "64 bytes from 192.168.1.10: seq=3 ttl=42 time=11.080 ms",
+      "64 bytes from 192.168.1.10: seq=4 ttl=42 time=8.598 ms",
+      "64 bytes from 192.168.1.10: seq=5 ttl=42 time=6.942 ms",
+      "[...]"
+    ],
+    "sha256": "c9e1b07419a83d175991c765189518198310e2f2a429cd2bd9485653d9587094"
+  },
+  "labs/rhel-administration/links.png": {
+    "title": "RHEL / symbolic and hard links",
+    "lines": [
+      "[shuaib@linux-project1 ~/project1_files]$ ln -s /etc/hosts hosts_link",
+      "[shuaib@linux-project1 ~/project1_files]$ ls -l hosts_link",
+      "lrwxrwxrwx. 1 shuaib shuaib 10 Nov 3 05:01 hosts_link -> /etc/hosts",
+      "[shuaib@linux-project1 ~/project1_files]$ cat /proc/sys/fs/protected_hardlinks",
+      "1",
+      "[shuaib@linux-project1 ~/project1_files]$ sudo ln /etc/hosts hosts_hardlink",
+      "[shuaib@linux-project1 ~/project1_files]$ ls -li /etc/hosts hosts_hardlink hosts_link",
+      "67243273 -rw-r--r--. 2 root root 384 Nov 29 2023 /etc/hosts",
+      "67243273 -rw-r--r--. 2 root root 384 Nov 29 2023 hosts_hardlink",
+      "2822905 lrwxrwxrwx. 1 shuaib shuaib 10 Nov 3 05:01 hosts_link -> /etc/hosts",
+      "[shuaib@linux-project1 ~/project1_files]$ stat -c '%n -> inode %i, %h hard links' /etc/hosts hosts_hardlink",
+      "/etc/hosts -> inode 67243273, 2 hard links",
+      "hosts_hardlink -> inode 67243273, 2 hard links",
+      "[shuaib@linux-project1 ~/project1_files]$ head -n 2 hosts_link",
+      "# Loopback entries; do not change.",
+      "# For historical reasons, localhost precedes localhost.localdomain:"
+    ],
+    "sha256": "cf433704a8abbf0dc2e7c8f0e13893dcbeedf0abbf9c95ddc6b4cfc31ed6869a"
+  },
+  "labs/rhel-administration/permissions.png": {
+    "title": "RHEL / ownership and permissions",
+    "lines": [
+      "[shuaib@linux-project1 ~/project1_files]$ touch permissions_test.txt group_test.txt",
+      "[shuaib@linux-project1 ~/project1_files]$ ls -l permissions_test.txt group_test.txt",
+      "-rw-r--r--. 1 shuaib shuaib 0 Nov 3 02:32 group_test.txt",
+      "-rw-r--r--. 1 shuaib shuaib 0 Nov 3 02:32 permissions_test.txt",
+      "[shuaib@linux-project1 ~/project1_files]$ sudo chown student1:project1_group permissions_test.txt",
+      "[shuaib@linux-project1 ~/project1_files]$ sudo chgrp project1_group group_test.txt",
+      "[shuaib@linux-project1 ~/project1_files]$ ls -l permissions_test.txt group_test.txt",
+      "-rw-r--r--. 1 shuaib project1_group 0 Nov 3 02:32 group_test.txt",
+      "-rw-r--r--. 1 student1 project1_group 0 Nov 3 02:32 permissions_test.txt",
+      "[shuaib@linux-project1 ~/project1_files]$ sudo chmod u+rw permissions_test.txt",
+      "[shuaib@linux-project1 ~/project1_files]$ sudo chmod o-w permissions_test.txt",
+      "[shuaib@linux-project1 ~/project1_files]$ sudo chmod 640 group_test.txt",
+      "[shuaib@linux-project1 ~/project1_files]$ stat -c '%A (%a) owner=%U group=%G %n' permissions_test.txt group_test.txt",
+      "-rw-r--r-- (644) owner=student1 group=project1_group permissions_test.txt",
+      "-rw-r----- (640) owner=shuaib group=project1_group group_test.txt",
+      "[shuaib@linux-project1 ~/project1_files]$ cat permissions_test.txt"
+    ],
+    "sha256": "a4a52ed15a9c140f892791222afe0358f71395510d45382af54deac4e3acc83d"
+  },
+  "labs/ad-troubleshooting/07-add-computer-failure.png": {
+    "title": "PowerShell / failed domain join",
+    "lines": [
+      "PS C:\\WINDOWS\\system32> Add-Computer -DomainName lab.local -Credential LAB\\Administrator -Verbose -Restart",
+      "VERBOSE: Performing the operation \"Join in domain 'lab.local'\" on target \"DESKTOP-IO53IGD\".",
+      "Add-Computer : Computer 'DESKTOP-IO53IGD' failed to join domain 'lab.local' from its current workgroup 'WORKGROUP'",
+      "with following error message: The specified domain either does not exist or could not be contacted.",
+      "At line:1 char:1",
+      "+ CategoryInfo : OperationStopped: (DESKTOP-IO53IGD:String) [Add-Computer], InvalidOperationException",
+      "+ FullyQualifiedErrorId : FailToJoinDomainFromWorkgroup,Microsoft.PowerShell.Commands.AddComputerCommand"
+    ],
+    "sha256": "7524687fcf6c9a7db20f6843eeb063252277b523cb4bc833aeefc3f7d7a8b915"
+  },
+  "labs/ad-troubleshooting/02-ad-group-membership-powershell.png": {
+    "title": "PowerShell / AD group design",
+    "lines": [
+      "PS C:\\Users\\Administrator> Get-ADUser -Filter 'SamAccountName -eq \"faraz\" -or SamAccountName -like \"employ*\"' |",
+      ">> ForEach-Object {",
+      ">>     [PSCustomObject]@{",
+      ">>         User = $_.SamAccountName",
+      ">>         Groups = (Get-ADPrincipalGroupMembership $_ |",
+      ">>             Select-Object -ExpandProperty Name) -join \", \"",
+      ">>     }",
+      ">> } | Format-Table -AutoSize",
+      "User          Groups",
+      "----          ------",
+      "faraz         Domain Users, Forti_Guests",
+      "employee_test Domain Users"
+    ],
+    "sha256": "1137fc6cc91d0a30ddcee14728f74869ec546f639c1227c054c32ebbc7d64e9d"
+  },
+  "labs/ad-troubleshooting/08-domain-login-success.png": {
+    "title": "PowerShell / authenticated identity",
+    "lines": [
+      "PS> whoami",
+      "lab\\faraz"
+    ],
+    "sha256": "76ee5e91e3f5d9e23eb06f9e35be754b434f52e334ed066e878f1387fc43963e"
+  },
+  "labs/ad-troubleshooting/09-domain-group-token-success.png": {
+    "title": "PowerShell / group token",
+    "lines": [
+      "PS C:\\WINDOWS\\system32> whoami /groups | Select-String \"Domain Users|Forti_Guests\"",
+      "LAB\\Forti_Guests  Group  [SID omitted]",
+      "Mandatory group, Enabled by default, Enabled group"
+    ],
+    "sha256": "944fc37a65722aff889cd075b52a18410398bac73d86413f08b29c5a0bcc2ab6"
+  },
+  "labs/enterprise-campus/asw1-vlan-trunk.png": {
+    "title": "ASW1 / VLANs and trunks",
+    "lines": [
+      "ASW1#show vlan brief",
+      "VLAN Name                 Status    Ports",
+      "1    default              active",
+      "10   USERS                active    Et0/0, Et0/1",
+      "20   VOICE                active    ",
+      "30   SERVERS              active    ",
+      "40   MGMT                 active    ",
+      "50   GUEST                active    ",
+      "99   NATIVE-BLK           active    ",
+      "999  PARKING              active    Et0/3",
+      "[...]",
+      "ASW1#show interfaces trunk",
+      "Port    Mode  Encapsulation  Status    Native vlan",
+      "Et0/2   on    802.1q         trunking  99",
+      "Port    Vlans allowed on trunk",
+      "Et0/2   10,20,30,40,50,99",
+      "Port    Vlans allowed and active in management domain",
+      "Et0/2   10,20,30,40,50,99",
+      "Port    Vlans in spanning tree forwarding state and not pruned",
+      "Et0/2   10,20,30,40,50,99"
+    ],
+    "sha256": "d0411f13e598a8fe5540f200e8088d2ef6c3a622b2918f0abb131c9d85217a47"
+  },
+  "labs/enterprise-campus/asw1-rpvst-summary.png": {
+    "title": "ASW1 / Rapid PVST+",
+    "lines": [
+      "ASW1#show spanning-tree summary",
+      "Switch is in rapid-pvst mode",
+      "Root bridge for: VLAN0099",
+      "Extended system ID                 enabled",
+      "Portfast Default                   disabled",
+      "Portfast Edge BPDU Guard Default    disabled",
+      "Portfast Edge BPDU Filter Default   disabled",
+      "Loopguard Default                  disabled",
+      "PVST Simulation Default            enabled but inactive in rapid-pvst mode",
+      "Bridge Assurance                   enabled",
+      "EtherChannel misconfig guard       enabled",
+      "Configured Pathcost method used is short",
+      "UplinkFast                         disabled",
+      "BackboneFast                       disabled",
+      "[...]"
+    ],
+    "sha256": "cb013dde44646ac183eb030a981ba8464d4d03aa109b287fa1f2f28798a627d4"
+  },
+  "labs/enterprise-campus/asw2-vlan-trunk.png": {
+    "title": "ASW2 / VLANs and trunks",
+    "lines": [
+      "VLAN Name                 Status    Ports",
+      "1    default              active",
+      "10   USERS                active    ",
+      "20   VOICE                active    Et0/0, Et0/1",
+      "30   SERVERS              active    ",
+      "40   MGMT                 active    ",
+      "50   GUEST                active    ",
+      "99   NATIVE-BLK           active    ",
+      "999  PARKING              active    Et0/3",
+      "[...]",
+      "ASW2#show interfaces trunk",
+      "Port    Mode  Encapsulation  Status    Native vlan",
+      "Et0/2   on    802.1q         trunking  99",
+      "Port    Vlans allowed on trunk",
+      "Et0/2   10,20,30,40,50,99",
+      "Port    Vlans allowed and active in management domain",
+      "Et0/2   10,20,30,40,50,99",
+      "Port    Vlans in spanning tree forwarding state and not pruned",
+      "Et0/2   10,20,30,40,50,99"
+    ],
+    "sha256": "da34894bf2392e837e11d9ae37e62d221376ebf61f6ae10a450e0484531ca670"
+  },
+  "labs/enterprise-campus/asw3-vlan-trunk.png": {
+    "title": "ASW3 / VLANs and trunks",
+    "lines": [
+      "VLAN Name                 Status    Ports",
+      "1    default              active",
+      "10   USERS                active    ",
+      "20   VOICE                active    ",
+      "30   SERVERS              active    Et0/0, Et0/1",
+      "40   MGMT                 active    ",
+      "50   GUEST                active    ",
+      "99   NATIVE-BLK           active    ",
+      "999  PARKING              active    Et0/3",
+      "[...]",
+      "ASW3#show interfaces trunk",
+      "Port    Mode  Encapsulation  Status    Native vlan",
+      "Et0/2   on    802.1q         trunking  99",
+      "Port    Vlans allowed on trunk",
+      "Et0/2   10,20,30,40,50,99",
+      "Port    Vlans allowed and active in management domain",
+      "Et0/2   10,20,30,40,50,99",
+      "Port    Vlans in spanning tree forwarding state and not pruned",
+      "Et0/2   10,20,30,40,50,99"
+    ],
+    "sha256": "5c5a516b696bbac6c05e1daffb68810a50eb149c05c9cefa0a8b7249622792ff"
+  },
+  "labs/enterprise-campus/asw3-rpvst-summary.png": {
+    "title": "ASW3 / Rapid PVST+",
+    "lines": [
+      "ASW3#show spanning-tree summary",
+      "Switch is in rapid-pvst mode",
+      "Root bridge for: none",
+      "Extended system ID                 enabled",
+      "Portfast Default                   disabled",
+      "Portfast Edge BPDU Guard Default    disabled",
+      "Portfast Edge BPDU Filter Default   disabled",
+      "Loopguard Default                  disabled",
+      "PVST Simulation Default            enabled but inactive in rapid-pvst mode",
+      "Bridge Assurance                   enabled",
+      "EtherChannel misconfig guard       enabled",
+      "Configured Pathcost method used is short",
+      "UplinkFast                         disabled",
+      "BackboneFast                       disabled",
+      "[...]"
+    ],
+    "sha256": "a893d16545406b2f5f59814209d45be63f8cd9f0e672f61117d8aea5aeb6f1f9"
+  },
+  "labs/enterprise-campus/asw4-vlan-trunk.png": {
+    "title": "ASW4 / VLANs and trunks",
+    "lines": [
+      "ASW4#show vlan brief",
+      "VLAN Name                 Status    Ports",
+      "1    default              active",
+      "10   USERS                active    ",
+      "20   VOICE                active    ",
+      "30   SERVERS              active    ",
+      "40   MGMT                 active    Et0/0",
+      "50   GUEST                active    Et0/1",
+      "99   NATIVE-BLK           active    ",
+      "999  PARKING              active    Et0/3",
+      "[...]",
+      "ASW4#show interfaces trunk",
+      "Port    Mode  Encapsulation  Status    Native vlan",
+      "Et0/2   on    802.1q         trunking  99",
+      "Port    Vlans allowed on trunk",
+      "Et0/2   10,20,30,40,50,99",
+      "Port    Vlans allowed and active in management domain",
+      "Et0/2   10,20,30,40,50,99",
+      "Port    Vlans in spanning tree forwarding state and not pruned",
+      "Et0/2   10,20,30,40,50,99"
+    ],
+    "sha256": "86e28f623f411646c465b4be50a61b4289282b4bfd94858b737a35749ab6e5c5"
+  },
+  "labs/enterprise-campus/asw4-rpvst-summary.png": {
+    "title": "ASW4 / Rapid PVST+",
+    "lines": [
+      "ASW4#show spanning-tree summary",
+      "Switch is in rapid-pvst mode",
+      "Root bridge for: none",
+      "Extended system ID                 enabled",
+      "Portfast Default                   disabled",
+      "Portfast Edge BPDU Guard Default    disabled",
+      "Portfast Edge BPDU Filter Default   disabled",
+      "Loopguard Default                  disabled",
+      "PVST Simulation Default            enabled but inactive in rapid-pvst mode",
+      "Bridge Assurance                   enabled",
+      "EtherChannel misconfig guard       enabled",
+      "Configured Pathcost method used is short",
+      "UplinkFast                         disabled",
+      "BackboneFast                       disabled",
+      "[...]"
+    ],
+    "sha256": "ce43dde03514963d62214fca6ed02ed25da4cae60d76599f3dea0d7c889ecd46"
+  },
+  "labs/enterprise-campus/asw2-access-config.png": {
+    "title": "ASW2 / access-port configuration",
+    "lines": [
+      "ASW2#show running-config | section interface Ethernet",
+      "interface Ethernet0/0",
+      " description USER_PC_3",
+      " switchport access vlan 20",
+      " switchport mode access",
+      " spanning-tree portfast edge",
+      " spanning-tree bpduguard enable",
+      "interface Ethernet0/1",
+      " description USER_PC_4",
+      " switchport access vlan 20",
+      " switchport mode access",
+      " spanning-tree portfast edge",
+      " spanning-tree bpduguard enable",
+      "interface Ethernet0/2",
+      " description TRUNK_TO_DSW1_E0/1",
+      " switchport trunk allowed vlan 10,20,30,40,50,99",
+      " switchport trunk encapsulation dot1q",
+      " switchport trunk native vlan 99",
+      " switchport mode trunk",
+      " switchport nonegotiate",
+      "interface Ethernet0/3",
+      " description UNUSED_PARKING",
+      " switchport access vlan 999",
+      " switchport mode access",
+      " shutdown"
+    ],
+    "sha256": "c9ca538358cd35bb39ba584a939f522fb648c2fcc4b91a5b23408cbe83ad5c3d"
+  },
+  "labs/enterprise-campus/dsw1-vlan-trunk.png": {
+    "title": "DSW1 / distribution trunks",
+    "lines": [
+      "VLAN Name                 Status",
+      "1    default              active",
+      "10   USERS                active",
+      "20   VOICE                active",
+      "30   SERVERS              active",
+      "40   MANAGEMENT                 active",
+      "50   GUESTS                active",
+      "99   NATIVE-BLACKHOLE           active",
+      "999  PARKING-LOT              active",
+      "[...]",
+      "DSW1#show interfaces trunk",
+      "Port    Mode  Encapsulation  Status    Native vlan",
+      "Et0/0   on    802.1q         trunking  99",
+      "Et0/1   on    802.1q         trunking  99",
+      "Et0/2   on    802.1q         trunking  99",
+      "Et0/3   on    802.1q         trunking  99",
+      "Port    Vlans allowed on trunk",
+      "Et0/0   10,20,30,40,50,99",
+      "Et0/1   10,20,30,40,50,99",
+      "Et0/2   10,20,30,40,50,99",
+      "Et0/3   10,20,30,40,50,99",
+      "[...]"
+    ],
+    "sha256": "2981d2b82d7368706c9bc96699d04bc8594132cadf65764680ca4804e6c4b1e4"
+  },
+  "labs/enterprise-campus/dsw1-rpvst-root.png": {
+    "title": "DSW1 / root-bridge validation",
+    "lines": [
+      "DSW1#show spanning-tree root",
+      "Vlan       Root ID                 Root Cost",
+      "VLAN0010   4106 aabb.cc00.7000    0",
+      "VLAN0020   4116 aabb.cc00.7000    0",
+      "VLAN0030   4126 aabb.cc00.7000    0",
+      "VLAN0040   4136 aabb.cc00.7000    0",
+      "VLAN0050   4146 aabb.cc00.7000    0",
+      "[...]",
+      "DSW1#show spanning-tree vlan 10",
+      "VLAN0010",
+      "Spanning tree enabled protocol rstp",
+      "Root ID    Priority 4106",
+      "           Address  aabb.cc00.7000",
+      "           This bridge is the root",
+      "Bridge ID  Priority 4106",
+      "Interface  Role Sts Cost  Prio.Nbr Type",
+      "Et0/0     Desg FWD 100   128.1    Shr",
+      "Et0/1     Desg FWD 100   128.2    Shr",
+      "Et0/2     Desg FWD 100   128.3    Shr",
+      "Et0/3     Desg FWD 100   128.4    Shr",
+      "DSW1#show running-config | section spanning-tree",
+      "spanning-tree mode rapid-pvst",
+      "spanning-tree portfast edge default",
+      "spanning-tree extend system-id",
+      "spanning-tree vlan 10,20,30,40,50 priority 4096"
+    ],
+    "sha256": "30839bdfd17e9e046d03cf83ac9adf072f5d493e472305cb4a50ce8501e54ea3"
+  },
+  "labs/enterprise-campus/dsw2-vlan-trunk.png": {
+    "title": "DSW2 / distribution trunks",
+    "lines": [
+      "DSW2#show vlan brief",
+      "VLAN Name                 Status",
+      "1    default              active",
+      "10   USERS                active",
+      "20   VOICE                active",
+      "30   SERVERS              active",
+      "40   MGMT                 active",
+      "50   GUEST                active",
+      "99   NATIVE-BLK           active",
+      "999  PARKING              active",
+      "[...]",
+      "DSW2#show interfaces trunk",
+      "Port    Mode  Encapsulation  Status    Native vlan",
+      "Et0/0   on    802.1q         trunking  99",
+      "Et0/1   on    802.1q         trunking  99",
+      "Et0/2   on    802.1q         trunking  99",
+      "Et0/3   on    802.1q         trunking  99",
+      "Port    Vlans allowed on trunk",
+      "Et0/0   10,20,30,40,50,99",
+      "Et0/1   10,20,30,40,50,99",
+      "Et0/2   10,20,30,40,50,99",
+      "Et0/3   10,20,30,40,50,99",
+      "[...]"
+    ],
+    "sha256": "ebe831381a07afb1c1306f754e1f0286888de20ce2de50c9a9bf65ab746a1c4e"
+  },
+  "labs/enterprise-campus/dsw2-rpvst-rootpath.png": {
+    "title": "DSW2 / root-bridge validation",
+    "lines": [
+      "DSW2#show spanning-tree root",
+      "Vlan       Root ID                 Root Cost",
+      "VLAN0010   4106 aabb.cc00.7000    100",
+      "VLAN0020   4116 aabb.cc00.7000    100",
+      "VLAN0030   4126 aabb.cc00.7000    100",
+      "VLAN0040   4136 aabb.cc00.7000    100",
+      "VLAN0050   4146 aabb.cc00.7000    100",
+      "[...]",
+      "DSW2#show spanning-tree vlan 10",
+      "VLAN0010",
+      "Spanning tree enabled protocol rstp",
+      "Root ID    Priority 4106",
+      "           Address  aabb.cc00.7000",
+      "           Cost     100",
+      "           Port     4 (Ethernet0/3)",
+      "Bridge ID  Priority 8202",
+      "Interface  Role Sts Cost  Prio.Nbr Type",
+      "Et0/0     Desg FWD 100   128.1    Shr",
+      "Et0/1     Desg FWD 100   128.2    Shr",
+      "Et0/2     Desg FWD 100   128.3    Shr",
+      "Et0/3     Root FWD 100   128.4    Shr",
+      "DSW2#show running-config | section spanning-tree",
+      "spanning-tree mode rapid-pvst",
+      "spanning-tree extend system-id",
+      "spanning-tree vlan 10,20,30,40,50 priority 8192"
+    ],
+    "sha256": "8c468c212e6c383cfddff74eaff37f22d604c489d815bb509682ebe0947c6811"
+  },
+  "labs/enterprise-campus/dist-rtr1-ip-interfaces.png": {
+    "title": "DIST-RTR1 / interface state",
+    "lines": [
+      "DIST-RTR1#show ip interface brief",
+      "Interface        IP-Address       OK? Method Status                Protocol",
+      "Ethernet0/0      unassigned       YES unset  up                    up",
+      "Ethernet0/0.10   10.10.10.2       YES manual up                    up",
+      "Ethernet0/0.20   10.10.20.2       YES manual up                    up",
+      "Ethernet0/0.30   10.10.30.2       YES manual up                    up",
+      "Ethernet0/0.40   10.10.40.2       YES manual up                    up",
+      "Ethernet0/0.50   10.10.50.2       YES manual up                    up",
+      "Ethernet0/0.99   unassigned       YES unset  up                    up",
+      "Ethernet0/1      unassigned       YES unset  administratively down down",
+      "Ethernet0/2      10.255.1.1       YES manual up                    up",
+      "Ethernet0/3      10.255.1.5       YES manual up                    up"
+    ],
+    "sha256": "ce13142484761110aa81c1f4ff8cec59371f5e66f058c173177e906a968746e4"
+  },
+  "labs/enterprise-campus/dist-rtr1-hsrp-routing.png": {
+    "title": "DIST-RTR1 / HSRP gateway state",
+    "lines": [
+      "DIST-RTR1#show standby brief",
+      "P indicates configured to preempt.",
+      "Interface  Grp Pri P State   Active       Standby      Virtual IP",
+      "Et0/0.10   10  110 P Active  local        10.10.10.3  10.10.10.1",
+      "Et0/0.20   20  110 P Active  local        10.10.20.3  10.10.20.1",
+      "Et0/0.30   30  110 P Active  local        10.10.30.3  10.10.30.1",
+      "Et0/0.40   40  110 P Active  local        10.10.40.3  10.10.40.1",
+      "Et0/0.50   50  110 P Active  local        10.10.50.3  10.10.50.1",
+      "[...]",
+      "DIST-RTR1#show ip ospf neighbor",
+      "Neighbor ID     Pri State     Address       Interface",
+      "22.22.22.22     1   FULL/BDR  10.255.1.6    Ethernet0/3",
+      "11.11.11.11     1   FULL/BDR  10.255.1.2    Ethernet0/2",
+      "DIST-RTR1#show ip route ospf",
+      "Gateway of last resort is 10.255.1.6 to network 0.0.0.0",
+      "O*E2 0.0.0.0/0 [110/1] via 10.255.1.6",
+      "               [110/1] via 10.255.1.2",
+      "[...]",
+      "DIST-RTR1#show ip route 0.0.0.0",
+      "Routing entry for 0.0.0.0/0, supernet",
+      "Known via \"ospf 10\", distance 110, metric 1, candidate default path",
+      "Tag 10, type extern 2, forward metric 10"
+    ],
+    "sha256": "879bc70b4c7d8cbf472a1f4e28a6e6674733f4d74e244bccffc310b1e65fbfea"
+  },
+  "labs/enterprise-campus/dist-rtr1-ospf-config.png": {
+    "title": "DIST-RTR1 / OSPF configuration",
+    "lines": [
+      "DIST-RTR1#show running-config | section router ospf",
+      "router ospf 10",
+      " router-id 1.1.1.1",
+      " passive-interface default",
+      " no passive-interface Ethernet0/0",
+      " no passive-interface Ethernet0/2",
+      " no passive-interface Ethernet0/3",
+      " network 10.10.10.0 0.0.0.255 area 0",
+      " network 10.10.20.0 0.0.0.255 area 0",
+      " network 10.10.30.0 0.0.0.255 area 0",
+      " network 10.10.40.0 0.0.0.255 area 0",
+      " network 10.10.50.0 0.0.0.255 area 0",
+      " network 10.255.1.0 0.0.0.3 area 0",
+      " network 10.255.1.4 0.0.0.3 area 0"
+    ],
+    "sha256": "e3f898c7075ca8af586122da56edf41a6977f1f864f8db0ffd46c7aea5960c10"
+  },
+  "labs/enterprise-campus/dist-rtr2-ip-interfaces.png": {
+    "title": "DIST-RTR2 / interface state",
+    "lines": [
+      "DIST-RTR2#show ip interface brief",
+      "Interface        IP-Address       OK? Method Status                Protocol",
+      "Ethernet0/0      unassigned       YES unset  up                    up",
+      "Ethernet0/0.10   10.10.10.3       YES manual up                    up",
+      "Ethernet0/0.20   10.10.20.3       YES manual up                    up",
+      "Ethernet0/0.30   10.10.30.3       YES manual up                    up",
+      "Ethernet0/0.40   10.10.40.3       YES manual up                    up",
+      "Ethernet0/0.50   10.10.50.3       YES manual up                    up",
+      "Ethernet0/0.99   unassigned       YES unset  up                    up",
+      "Ethernet0/1      unassigned       YES unset  administratively down down",
+      "Ethernet0/2      10.255.1.13      YES manual up                    up",
+      "Ethernet0/3      10.255.1.9       YES manual up                    up"
+    ],
+    "sha256": "10e819a4da2fdb91f5b6a0011624c180f221d84a4756da4dac1c1038a54a98ff"
+  },
+  "labs/enterprise-campus/dist-rtr2-hsrp.png": {
+    "title": "DIST-RTR2 / HSRP gateway state",
+    "lines": [
+      "DIST-RTR2#show standby brief",
+      "P indicates configured to preempt.",
+      "Interface  Grp Pri P State   Active       Standby      Virtual IP",
+      "Et0/0.10   10  100 P Standby 10.10.10.2  local  10.10.10.1",
+      "Et0/0.20   20  100 P Standby 10.10.20.2  local  10.10.20.1",
+      "Et0/0.30   30  100 P Standby 10.10.30.2  local  10.10.30.1",
+      "Et0/0.40   40  100 P Standby 10.10.40.2  local  10.10.40.1",
+      "Et0/0.50   50  100 P Standby 10.10.50.2  local  10.10.50.1"
+    ],
+    "sha256": "fcb972c7792c998f7ba9f4c87d73e9ae5c4a5e4663c824cabe73c6f16744e435"
+  },
+  "labs/enterprise-campus/dist-rtr2-ospf-config.png": {
+    "title": "DIST-RTR2 / OSPF configuration",
+    "lines": [
+      "DIST-RTR2#show running-config | section router ospf",
+      "router ospf 10",
+      " router-id 2.2.2.2",
+      " passive-interface default",
+      " no passive-interface Ethernet0/0",
+      " no passive-interface Ethernet0/2",
+      " no passive-interface Ethernet0/3",
+      " network 10.10.10.0 0.0.0.255 area 0",
+      " network 10.10.20.0 0.0.0.255 area 0",
+      " network 10.10.30.0 0.0.0.255 area 0",
+      " network 10.10.40.0 0.0.0.255 area 0",
+      " network 10.10.50.0 0.0.0.255 area 0",
+      " network 10.255.1.8 0.0.0.3 area 0",
+      " network 10.255.1.12 0.0.0.3 area 0"
+    ],
+    "sha256": "5f4b2142627620d3af714c3f7b31194a87e50a1bd0fa6307fbeffe0781a608a2"
+  },
+  "labs/enterprise-campus/dist-rtr1-subinterface-config.png": {
+    "title": "DIST-RTR1 / captured subinterface configuration",
+    "lines": [
+      "DIST-RTR1#show running-config | section interface Ethernet0/0",
+      "interface Ethernet0/0",
+      " description TRUNK_TO_DSW1_E0/2",
+      " no ip address",
+      "interface Ethernet0/0.10",
+      " description VLAN10_USERS_GW",
+      " encapsulation dot1Q 10",
+      " no ip address",
+      " standby 10 ip 10.10.10.1",
+      " standby 10 priority 110",
+      " standby 10 preempt",
+      "interface Ethernet0/0.20",
+      " description VLAN20_VOICE_GW",
+      " encapsulation dot1Q 20",
+      " no ip address",
+      " standby 20 ip 10.10.20.1",
+      " standby 20 priority 110",
+      " standby 20 preempt",
+      "interface Ethernet0/0.30",
+      " description VLAN30_SERVERS_GW",
+      " encapsulation dot1Q 30",
+      " no ip address",
+      " standby 30 ip 10.10.30.1",
+      " standby 30 priority 110",
+      "[...]"
+    ],
+    "sha256": "7dbe46e12dd07f47a643b9715c5054b8d78bbbb4034f4a7d586d41cb0acd93f2"
+  },
+  "labs/enterprise-campus/dist-rtr2-ospf-routes.png": {
+    "title": "DIST-RTR2 / OSPF neighbors and routes",
+    "lines": [
+      "DIST-RTR2#show ip ospf neighbor",
+      "Neighbor ID     Pri State     Address       Interface",
+      "22.22.22.22     1   FULL/BDR  10.255.1.14   Ethernet0/2",
+      "11.11.11.11     1   FULL/BDR  10.255.1.10   Ethernet0/3",
+      "DIST-RTR2#show ip route ospf",
+      "[...]",
+      "Gateway of last resort is 10.255.1.14 to network 0.0.0.0",
+      "O*E2 0.0.0.0/0 [110/1] via 10.255.1.14",
+      "               [110/1] via 10.255.1.10",
+      "O 10.255.1.0/30 [110/20] via 10.255.1.10, Ethernet0/3",
+      "O 10.255.1.4/30 [110/20] via 10.255.1.14, Ethernet0/2"
+    ],
+    "sha256": "a9de2f796e732a2284899ad33c4c0fe509dd05f9b66640f3bfddb72dc96a4eed"
+  },
+  "labs/enterprise-campus/edge1-interfaces.png": {
+    "title": "EDGE1 / interfaces and adjacency",
+    "lines": [
+      "EDGE1#show ip interface brief",
+      "Interface    IP-Address      OK? Method Status                Protocol",
+      "Ethernet0/0  10.255.1.10      YES manual up                    up",
+      "Ethernet0/1  10.255.1.2       YES manual up                    up",
+      "Ethernet0/2  203.0.113.2      YES manual up                    up",
+      "Ethernet0/3  unassigned      YES unset  administratively down down",
+      "EDGE1#show ip ospf neighbor",
+      "Neighbor ID Pri State   Address      Interface",
+      "2.2.2.2     1   FULL/DR 10.255.1.9   Ethernet0/0",
+      "1.1.1.1     1   FULL/DR 10.255.1.1   Ethernet0/1"
+    ],
+    "sha256": "ead1c2f1166360f9104cd7411d3c14c6cf9410d1d45de4c2f62484318917b0f6"
+  },
+  "labs/enterprise-campus/edge1-ospf-routes.png": {
+    "title": "EDGE1 / OSPF route learning",
+    "lines": [
+      "EDGE1#show ip route ospf",
+      "[...]",
+      "Gateway of last resort is 203.0.113.1 to network 0.0.0.0",
+      "10.0.0.0/8 is variably subnetted, 11 subnets, 3 masks",
+      "O 10.10.10.0/24 [110/20] via 10.255.1.9, Ethernet0/0",
+      "                  [110/20] via 10.255.1.1, Ethernet0/1",
+      "O 10.10.20.0/24 [110/20] via 10.255.1.9, Ethernet0/0",
+      "                  [110/20] via 10.255.1.1, Ethernet0/1",
+      "O 10.10.30.0/24 [110/20] via 10.255.1.9, Ethernet0/0",
+      "                  [110/20] via 10.255.1.1, Ethernet0/1",
+      "O 10.10.40.0/24 [110/20] via 10.255.1.9, Ethernet0/0",
+      "                  [110/20] via 10.255.1.1, Ethernet0/1",
+      "O 10.10.50.0/24 [110/20] via 10.255.1.9, Ethernet0/0"
+    ],
+    "sha256": "bc2e585504de858f54bfed8aea319feb3898be5d7082eeb653c2f8448902889b"
+  },
+  "labs/enterprise-campus/edge1-isp-ping.png": {
+    "title": "EDGE1 / simulated internet reachability",
+    "lines": [
+      "EDGE1#ping 8.8.8.8",
+      "Type escape sequence to abort.",
+      "Sending 5, 100-byte ICMP Echos to 8.8.8.8, timeout is 2 seconds:",
+      "!!!!!",
+      "Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms",
+      "EDGE1#"
+    ],
+    "sha256": "5da9f507760f717545422c06449365c7b46202f86345e961b8af596cda1bd35c"
+  },
+  "labs/enterprise-campus/edge2-interfaces.png": {
+    "title": "EDGE2 / interfaces and adjacency",
+    "lines": [
+      "EDGE2#show ip interface brief",
+      "Interface    IP-Address      OK? Method Status                Protocol",
+      "Ethernet0/0  10.255.1.6       YES manual up                    up",
+      "Ethernet0/1  10.255.1.14      YES manual up                    up",
+      "Ethernet0/2  203.0.113.6      YES manual up                    up",
+      "Ethernet0/3  unassigned      YES unset  administratively down down"
+    ],
+    "sha256": "e02227a610e9ff1e440722c7154fdf82d95a24b377892564c4eeeab041e6a47d"
+  },
+  "labs/enterprise-campus/edge2-ospf-routes.png": {
+    "title": "EDGE2 / OSPF route learning",
+    "lines": [
+      "EDGE2#show ip route ospf",
+      "[...]",
+      "Gateway of last resort is 203.0.113.5 to network 0.0.0.0",
+      "10.0.0.0/8 is variably subnetted, 11 subnets, 3 masks",
+      "O 10.10.10.0/24 [110/20] via 10.255.1.13, Ethernet0/1",
+      "                  [110/20] via 10.255.1.5, Ethernet0/0",
+      "O 10.10.20.0/24 [110/20] via 10.255.1.13, Ethernet0/1",
+      "                  [110/20] via 10.255.1.5, Ethernet0/0",
+      "O 10.10.30.0/24 [110/20] via 10.255.1.13, Ethernet0/1",
+      "                  [110/20] via 10.255.1.5, Ethernet0/0",
+      "O 10.10.40.0/24 [110/20] via 10.255.1.13, Ethernet0/1",
+      "                  [110/20] via 10.255.1.5, Ethernet0/0",
+      "O 10.10.50.0/24 [110/20] via 10.255.1.13, Ethernet0/1"
+    ],
+    "sha256": "4c46821157bec9e112afad40b97b48af3c84c47f65e60b251b28b889f6d27c0e"
+  },
+  "labs/enterprise-campus/edge2-isp-ping.png": {
+    "title": "EDGE2 / simulated internet reachability",
+    "lines": [
+      "EDGE2#ping 8.8.8.8",
+      "Type escape sequence to abort.",
+      "Sending 5, 100-byte ICMP Echos to 8.8.8.8, timeout is 2 seconds:",
+      "!!!!!",
+      "Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms",
+      "EDGE2#"
+    ],
+    "sha256": "ccc15a5993288289f26c8c8c981e286d47ef7b1551b42f1c52dce3753246ebb6"
+  },
+  "labs/enterprise-campus/edge2-ospf-neighbor.png": {
+    "title": "EDGE2 / neighbor state",
+    "lines": [
+      "EDGE2#show ip ospf neighbor",
+      "Neighbor ID Pri State   Dead Time Address       Interface",
+      "2.2.2.2     1   FULL/DR 00:00:38 10.255.1.13   Ethernet0/1",
+      "1.1.1.1     1   FULL/DR 00:00:34 10.255.1.5    Ethernet0/0"
+    ],
+    "sha256": "3f4508a371f8efe6f086ff82f4c6e433a4af75b3bb83da1d93662a8ed1f5df74"
+  },
+  "labs/enterprise-campus/isp-interfaces.png": {
+    "title": "ISP-RTR / edge-facing interfaces",
+    "lines": [
+      "ISP-RTR#show ip interface brief",
+      "Interface    IP-Address      OK? Method Status                Protocol",
+      "Ethernet0/0  203.0.113.5     YES manual up                    up",
+      "Ethernet0/1  203.0.113.1     YES manual up                    up",
+      "Ethernet0/2  unassigned      YES unset  administratively down down",
+      "Ethernet0/3  unassigned      YES unset  administratively down down",
+      "Loopback0    8.8.8.8         YES manual up                    up",
+      "Loopback1    1.1.1.1         YES manual up                    up"
+    ],
+    "sha256": "29ecc023e195b6fce390258750cf67944b630ab7b953d803ec89dfd8b52d3c5a"
+  },
+  "labs/enterprise-campus/isp-routing-table.png": {
+    "title": "ISP-RTR / campus return route",
+    "lines": [
+      "ISP-RTR#show ip route",
+      "[...]",
+      "Gateway of last resort is not set",
+      "C 1.1.1.1 is directly connected, Loopback1",
+      "C 8.8.8.8 is directly connected, Loopback0",
+      "S 10.10.0.0 [1/0] via 203.0.113.2",
+      "C 203.0.113.0/30 is directly connected, Ethernet0/1",
+      "L 203.0.113.1/32 is directly connected, Ethernet0/1",
+      "C 203.0.113.4/30 is directly connected, Ethernet0/0"
+    ],
+    "sha256": "33d76a047a87af4784dc5a7b302366b6e839de2175a47b5b4f50eadba8d5ac55"
+  },
+  "labs/enterprise-campus/isp-edge-pings.png": {
+    "title": "ISP-RTR / edge reachability",
+    "lines": [
+      "ISP-RTR#ping 203.0.113.6",
+      "Type escape sequence to abort.",
+      "Sending 5, 100-byte ICMP Echos to 203.0.113.6, timeout is 2 seconds:",
+      "!!!!!",
+      "Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms",
+      "ISP-RTR#"
+    ],
+    "sha256": "0edae299e580f1d4297fa811d4598cdd717042fbbf808a79ac9d3ce47022b43d"
+  },
+  "labs/multi-area-ospf/screenshots/03-r5-ping-r1.png": {
+    "title": "R5 / extended ping",
+    "lines": [
+      "R5#ping",
+      "Protocol [ip]:",
+      "Target IP address: 192.168.1.1",
+      "Repeat count [5]:",
+      "Datagram size [100]:",
+      "Timeout in seconds [2]:",
+      "Extended commands [n]:",
+      "Sweep range of sizes [n]:",
+      "Type escape sequence to abort.",
+      "Sending 5, 100-byte ICMP Echos to 192.168.1.1, timeout is 2 seconds:",
+      "!!!!!",
+      "Success rate is 100 percent (5/5), round-trip min/avg/max = 2/3/4 ms"
+    ],
+    "sha256": "758435cfa9894bbfe6639ab4fcb164b280fd153da95478396e40347a5ba5c9b8"
+  },
+  "labs/multi-area-ospf/screenshots/04-r4-ping-r1.png": {
+    "title": "R4 / extended ping",
+    "lines": [
+      "R4#ping",
+      "Protocol [ip]:",
+      "Target IP address: 192.168.1.1",
+      "Repeat count [5]:",
+      "Datagram size [100]:",
+      "Timeout in seconds [2]:",
+      "Extended commands [n]:",
+      "Sweep range of sizes [n]:",
+      "Type escape sequence to abort.",
+      "Sending 5, 100-byte ICMP Echos to 192.168.1.1, timeout is 2 seconds:",
+      "!!!!!",
+      "Success rate is 100 percent (5/5), round-trip min/avg/max = 1/2/4 ms"
+    ],
+    "sha256": "30d7a8b8684d39e2ead7093f67d82fdeb6624f2fa04221061867776b1c560305"
+  },
+  "labs/multi-area-ospf/screenshots/02-r1-ospf-routes.png": {
+    "title": "R1 / inter-area route excerpt",
+    "lines": [
+      "Gateway of last resort is not set",
+      "[...]",
+      "192.168.3.0/30 is subnetted, 1 subnets",
+      "O IA 192.168.3.0 [110/2] via 192.168.2.2, GigabitEthernet0/1",
+      "                [110/2] via 192.168.1.2, GigabitEthernet0/0",
+      "192.168.4.0/30 is subnetted, 1 subnets",
+      "O IA 192.168.4.0 [110/2] via 192.168.1.2, GigabitEthernet0/0",
+      "192.168.5.0/30 is subnetted, 1 subnets",
+      "O IA 192.168.5.0 [110/2] via 192.168.2.2, GigabitEthernet0/1"
+    ],
+    "sha256": "8d244cdb0d63230456fddd56d2d1ab9176624e18d9dab625b0aba9b58cbbc09b"
+  },
+  "labs/stp/03_sw1_show_spanning_tree_vlan10.png": {
+    "title": "SW1 / VLAN 10 forwarding roles",
+    "lines": [
+      "VLAN0010",
+      "Spanning tree enabled protocol rstp",
+      "Root ID    Priority 32778",
+      "           Address  5254.0049.f8d5",
+      "           Cost     100",
+      "           Port     1 (Ethernet0/0)",
+      "Bridge ID  Priority 32778 (priority 32768 sys-id-ext 10)",
+      "           Address  aabb.cc00.0100",
+      "Interface  Role Sts Cost Prio.Nbr Type",
+      "Et0/0      Root FWD 100  128.1    P2p",
+      "Et0/1      Altn BLK 100  128.2    P2p"
+    ],
+    "sha256": "6383c2214603fb48ca1fba34010fb1e845216f807b2d20bd75f8a39c210ed5e5"
+  },
+  "labs/stp/05_dist1_show_spanning_tree_vlan10.png": {
+    "title": "DIST1 / recorded root bridge",
+    "lines": [
+      "VLAN0010",
+      "Spanning tree enabled protocol rstp",
+      "Root ID    Priority 32778",
+      "           Address  5254.0049.f8d5",
+      "           This bridge is the root",
+      "Bridge ID  Priority 32778 (priority 32768 sys-id-ext 10)",
+      "           Address  5254.0049.f8d5",
+      "Interface  Role Sts Cost Prio.Nbr Type",
+      "Gi0/0      Desg FWD 4    128.1    P2p",
+      "Gi0/1      Desg FWD 4    128.2    P2p",
+      "Gi0/2      Desg FWD 4    128.3    P2p"
+    ],
+    "sha256": "fd04241379a0d0bae5014a146a2174797bf75b070de9c78a32425d8a4e30956e"
+  },
+  "labs/snmp/06_branch_ospf.png": {
+    "title": "Branch / routing configuration",
+    "lines": [
+      "Branch#sh running-config | section ospf",
+      "router ospf 1",
+      " router-id 1.1.1.1",
+      " network 1.1.1.1 0.0.0.0 area 0",
+      " network 10.10.10.0 0.0.0.255 area 0",
+      " network 192.168.1.0 0.0.0.255 area 0",
+      " network 203.0.113.0 0.0.0.3 area 0",
+      " network 203.0.113.4 0.0.0.3 area 0",
+      " distribute-list prefix PROTECT_TRANSIT in",
+      "router ospf 100",
+      " router-id 5.5.5.5",
+      " network 203.0.113.4 0.0.0.3 area 0",
+      "Branch#"
+    ],
+    "sha256": "5c14680d45098d3d7b75ad776b922455d30a1c8cc10cc8db2efbb4c9e394a75d"
+  },
+  "labs/snmp/09_snmp_traps_r2.png": {
+    "title": "R2 / enabled notification types",
+    "lines": [
+      "R2#sh running-config | include snmp-server enable traps",
+      "snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart",
+      "snmp-server enable traps vrrp",
+      "snmp-server enable traps flowmon",
+      "snmp-server enable traps dsl",
+      "snmp-server enable traps tty",
+      "snmp-server enable traps eigrp",
+      "snmp-server enable traps ospf state-change",
+      "snmp-server enable traps ospf errors",
+      "snmp-server enable traps ospf retransmit",
+      "snmp-server enable traps ospf lsa",
+      "snmp-server enable traps ospf cisco-specific state-change nssa-trans-change",
+      "snmp-server enable traps ospf cisco-specific state-change shamlink interface",
+      "snmp-server enable traps ospf cisco-specific state-change shamlink neighbor",
+      "snmp-server enable traps ospf cisco-specific errors",
+      "snmp-server enable traps ospf cisco-specific retransmit",
+      "snmp-server enable traps ospf cisco-specific lsa",
+      "snmp-server enable traps xgcp",
+      "snmp-server enable traps isdn call-information",
+      "snmp-server enable traps isdn layer2",
+      "snmp-server enable traps isdn chan-not-avail",
+      "snmp-server enable traps isdn ietf"
+    ],
+    "sha256": "26dfbc2962e11e984bcfd2be74f0cd6c54cf58dabb9288ac564ef7e30766bf32"
+  },
+  "labs/snmp/07_snmp_community_r1.png": {
+    "title": "R1 / read-only monitoring (value masked)",
+    "lines": [
+      "R1#sh running-config | include <COMMUNITY>",
+      "snmp-server community <COMMUNITY> RO",
+      "snmp-server host 192.168.1.89 version 2c <COMMUNITY>"
+    ],
+    "sha256": "66c1a513688950503ddf6e7f27ff395ae1647f8da4a44b0bb950fe9e136a4163"
+  },
+  "labs/gcp-eve-migration/03_kvm_not_available.png": {
+    "title": "Cloud VM / captured KVM failure",
+    "lines": [
+      "INFO: Your CPU does not support KVM extensions.",
+      "KVM acceleration can NOT be used."
+    ],
+    "sha256": "0fc83d21b94f5503ead0e5c444689881d4fad52cfa23aed4a1d473c80f5ffe9b"
+  },
+  "labs/gcp-eve-migration/14_dpkg_eve_installed.png": {
+    "title": "Cloud VM / installed EVE-NG packages",
+    "lines": [
+      "dpkg -l | grep eve-ng",
+      "ls /var/www/html",
+      "ii  eve-ng                6.2.0-4       amd64  A new generation software for networking labs.",
+      "ii  eve-ng-dynamips       6.0.1-5       amd64  Dynamips files for Eve-NG.",
+      "ii  eve-ng-pro-guacamole  6.5.0-16      amd64  Guacamole for UNetLab/EVE-NG",
+      "ii  eve-ng-qemu           6.3.0-2       amd64  QEMU files for Eve-NG.",
+      "ii  eve-ng-schema         6.0.1-0       amd64  Database schema for UNetLab/EVE-NG",
+      "[...]",
+      "index.html"
+    ],
+    "sha256": "2a9986f43d20a61c63072ca887117eb3c81bd9ef9b950ffca855e0c394b3f1dc"
+  },
+  "labs/gcp-eve-migration/11_static_ip_attached.png": {
+    "title": "Cloud Shell / recorded instance start",
+    "lines": [
+      "cloudshell:~ (topodrawer) $ gcloud compute instances start eve-ng",
+      "Starting instance(s) eve-ng...done.",
+      "Instance internal IP is 10.150.0.3"
+    ],
+    "sha256": "9296128b9325208fa69bc3ed306acbdf9a6e595e98d2bbb146ae5aac8ac4cd6f"
+  }
+}
