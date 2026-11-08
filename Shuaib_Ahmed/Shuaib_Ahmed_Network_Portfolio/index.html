@@ -18,6 +18,7 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <script src="assets/js/palette-init.js"></script>
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/signal-studio.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -74,20 +75,21 @@
 <link rel="stylesheet" href="assets/css/physical-tv.css"></head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<nav class="nav"><div class="container nav-inner"><a class="brand" href="index.html"><span class="brand-mark">SA</span><span>Shuaib Ahmed</span></a><div class="nav-links"><a href="#certifications">Certifications</a><a href="#labs">Labs</a><a href="#projects">TopoDrawer</a><a href="#field-work">Knowledge Network</a><a href="#contact" class="nav-cta">Contact</a></div></div></nav>
+<nav class="nav"><div class="container nav-inner"><a class="brand" href="index.html"><span class="brand-mark">SA</span><span>Shuaib Ahmed</span></a><div class="nav-links"><a href="smell-test.html">Smell test</a><a href="#certifications">Certifications</a><a href="#labs">Labs</a><a href="#projects">TopoDrawer</a><a href="#field-work">Knowledge Network</a><a href="#contact" class="nav-cta">Contact</a></div></div></nav>
 <main id="main">
 <section class="hero hero-identity">
   <div class="container hero-content hero-split">
     <div class="hero-copy">
       <h1>Shuaib Ahmed</h1>
     </div>
+    <div class="hero-instrument">
     <figure class="crt-portrait" data-crt-portrait>
       <div class="crt-screen">
         <img src="assets/img/crt-portrait.webp" width="720" height="900" alt="Portrait of Shuaib Ahmed drawn in glowing blue scanlines on a CRT screen" decoding="async">
-        <canvas data-crt-canvas aria-hidden="true"></canvas>
+        <canvas data-particle-canvas aria-hidden="true"></canvas>
         <div class="crt-hud" aria-hidden="true">
           <svg viewBox="0 0 16 16"><path d="M1 15V1h14"/></svg><svg viewBox="0 0 16 16"><path d="M1 15V1h14"/></svg><svg viewBox="0 0 16 16"><path d="M1 15V1h14"/></svg><svg viewBox="0 0 16 16"><path d="M1 15V1h14"/></svg>
-          <span class="crt-hud-top">SA-01 // NYC</span><span class="crt-hud-bottom">NETWORK ENGINEER</span>
+          <span class="crt-hud-top">SA-01 // NYC</span><span class="crt-hud-bottom">01 // SHUAIB AHMED</span><span class="studio-coords">X +00 / Z 35</span>
         </div>
       </div>
       <div class="crt-bezel">
@@ -100,6 +102,30 @@
           <button type="button" data-palette="blue" aria-pressed="true" aria-label="Electric blue" title="Electric blue" style="--swatch:#004cff"></button>
         </div>
       </div>
+    </figure>
+<div class="studio-controls" data-studio-controls hidden>
+        <div class="studio-modes" role="group" aria-label="Portrait display mode"><button data-mode="crt" aria-pressed="true">CRT</button><button data-mode="dither" aria-pressed="false">1-BIT</button><button data-mode="ascii" aria-pressed="false">ASCII</button><button data-mode="waveform" aria-pressed="false">WAVEFORM</button><button data-mode="source" aria-pressed="false" title="Undithered luminance source">SOURCE</button></div>
+        <div class="studio-sliders"><label>DEPTH <input type="range" data-depth min="0" max="100" value="35"></label><label>SPARSE / DENSE <input type="range" data-density min="20" max="100" value="82"></label></div>
+        <div class="studio-switches"><button data-trails aria-pressed="false">TRAILS</button><button data-waves aria-pressed="false">WAVES</button><button data-links aria-pressed="false">LINKS</button><button data-scatter>SCATTER</button><button data-portrait-mic aria-pressed="false">ENABLE MIC</button></div>
+        <p class="studio-status" data-portrait-status role="status">Drag the glass to tilt. Mic input stays on this device.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="lemon-lab" id="smell-test" aria-labelledby="lemon-title">
+  <div class="container lemon-grid">
+    <div class="lemon-copy">
+      <h2 id="lemon-title"><small>SMELL TEST // 01 — </small>LEMON</h2>
+      <p>Your phone can't make smell. Tap it — your brain fills it in.</p>
+      <div class="lemon-keys"><button type="button" data-cut>CUT THE LEMON</button><button type="button" data-lemon-mic aria-pressed="false">OR BLOW INTO THE MIC</button></div>
+      <p class="studio-status" data-lemon-status role="status"></p>
+      <p class="lemon-result" data-cut-result role="status"></p>
+      <a class="studio-link" href="smell-test.html">Open the standalone test ↗</a>
+    </div>
+    <figure class="lemon-display">
+      <figcaption><span>SA / SENSORY STUDIES</span><span>FIG. 01</span></figcaption>
+      <canvas data-lemon-canvas role="img" aria-label="An acid-yellow point cloud in the shape of a lemon on black"></canvas>
+      <div class="lemon-caption"><span>CITRUS LIMON</span><span data-fruit-state>INTACT</span></div>
     </figure>
   </div>
 </section>
@@ -217,6 +243,7 @@
 <script src="assets/js/photo-shine.js"></script>
 <script src="assets/js/crt-portrait-data.js"></script>
 <script src="assets/js/crt-channels-data.js"></script>
-<script src="assets/js/crt-portrait.js"></script>
+<script src="assets/js/sensory-studio.js"></script>
+<script src="assets/js/particle-portrait.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/evidence-dither.js"></script><script src="assets/js/crt-field.js"></script><script src="assets/js/tv-frame.js"></script><script src="assets/js/receipt-tv.js"></script><script src="assets/js/lab-directory.js"></script><script src="assets/js/certificate-data.js"></script><script src="assets/js/certificate-tv.js"></script><script src="assets/js/topodrawer-tv.js"></script><script src="assets/js/tv-shell.js"></script></body></html>
