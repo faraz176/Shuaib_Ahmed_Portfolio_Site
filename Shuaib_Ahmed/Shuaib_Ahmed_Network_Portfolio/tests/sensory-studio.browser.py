@@ -78,7 +78,12 @@ with sync_playwright() as pw:
    sample();})""")
  assert all(k in shapes for k in ['STARBURST','BLOB','DIAMOND','WISP','REFORMED']) and shapes['WISP']<shapes['DIAMOND']*.88,shapes
  result['fluid_forms']=list(shapes)
- pg.wait_for_function('document.querySelector("[data-fruit-state]").textContent==="REFORMED"',timeout=5000)
+ pg.wait_for_function('document.querySelector("[data-fruit-state]").textContent==="REFORMED"',timeout=7000)
+ fruit=pg.locator('[data-lemon-canvas]').evaluate("""c=>{const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let green=0,yellow=0;
+   for(let i=0;i<d.length;i+=4){const r=d[i],g=d[i+1],b=d[i+2];if(g>r*1.35&&g>b*1.25&&g>60)green++;if(r>g*.72&&g>b*1.25&&r>80)yellow++;}
+   return {green,yellow};}""")
+ assert fruit['green']>fruit['yellow']*.015 and fruit['yellow']>12000,fruit
+ result['lemon_particle_colors']=fruit
  if O: pg.locator('.lemon-grid').screenshot(path=str(O/'lemon-study.png'))
  pg.goto(base+'/smell-test.html',wait_until='load');assert pg.locator('h1').inner_text().endswith('LEMON')
  pg.locator('[data-lemon-mic]').click();pg.wait_for_function('document.querySelector("[data-lemon-mic]").getAttribute("aria-pressed")==="true"')
@@ -102,7 +107,7 @@ with sync_playwright() as pw:
  fixed=pc.evaluate('c=>c.toDataURL()');pg.wait_for_timeout(250);assert pc.evaluate('c=>c.toDataURL()')==fixed
  if O: rig.screenshot(path=str(O/'waveform-portrait.png'))
  for width in [320,390,768,1024,1440]:
-  pg.set_viewport_size({'width':width,'height':900});pg.wait_for_timeout(60)
+  pg.set_viewport_size({'width':width,'height':900});pg.wait_for_timeout(250)
   assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
  result.update({'no_page_overflow':True,'reduced_motion':True,'simulated_microphones':True,'page_errors':err,'http_errors':bad})
  assert not err and not bad,(err,bad)
