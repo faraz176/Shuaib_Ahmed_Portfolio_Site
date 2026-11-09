@@ -2,6 +2,7 @@
    rolling refresh). The video element stays in the page; "Clean picture", a missing GPU, or a file:// page
    shows it directly with native controls. */
 (() => {
+  if (document.body.classList.contains('dos-home')) return;
   'use strict';
   const box = document.querySelector('#projects .project-video'), video = box?.querySelector('video');
   if (!video || !window.TVFrame) return;

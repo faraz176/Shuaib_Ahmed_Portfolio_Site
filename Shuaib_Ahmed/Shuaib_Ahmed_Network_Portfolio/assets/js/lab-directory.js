@@ -1,6 +1,7 @@
 /* Lab TV: the homepage lab cards as C:\LABS on receipt paper (receipt-tv.js). Each .RPT file summarizes one report
    and links to it; the cards stay in the page as the Plain view. */
 (() => {
+  if (document.body.classList.contains('dos-home')) return;
   'use strict';
   const section = document.querySelector('#labs'), cards = section?.querySelector('.lab-grid'), R = window.ReceiptTV;
   if (!cards || !R) return;

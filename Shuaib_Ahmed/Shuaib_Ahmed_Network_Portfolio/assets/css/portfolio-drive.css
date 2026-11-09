@@ -1,0 +1,50 @@
+/* One glass tube; the controls and VCR deck belong to the restored set. */
+.dos-home {background:#000;color:#e1eaff}
+.dos-home>.nav,.dos-home main>section:not(.dos-station),.dos-home>.footer,.dos-home>.crt-field {display:none!important}
+.dos-station {width:min(100%,970px);padding:0 6px 14px;margin:auto}
+.dos-tv .sa-tv-frame {height:calc(clamp(400px,57svh,660px) + 46.33cqw)}
+.dos-tv .sa-tv-screen {background:#010203}
+.dos-tube {position:absolute;inset:2% 3%;display:flex;flex-direction:column;font:500 clamp(12px,1.6cqw,17px)/1.45 Consolas,'Courier New',monospace;color:#dae6ff}
+.dos-bar,.dos-form {display:flex;align-items:center;gap:8px;flex:none;padding:6px 0;border-bottom:1px solid var(--accent);color:var(--accent-pale)}
+.dos-tube button,.dos-rack a {background:#080a10;color:var(--accent-pale);border:1px solid #52668b;padding:4px 8px;font:inherit;cursor:pointer}
+.dos-tube :focus-visible,.dos-rack :focus-visible {outline:2px solid var(--accent-pale);outline-offset:-2px}
+.dos-location {flex:1;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size:.84em}
+.dos-scroll {flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#58668a #050609;padding:.3em .25em 1em}
+.dos-banner {display:flex;align-items:center;justify-content:space-between;gap:10px;padding:.65em 0}
+.dos-banner small,.dos-label,.dos-total,.dos-meta {font-size:.76em;letter-spacing:.05em;color:var(--accent-pale)}
+.dos-banner h1,.dos-title {font-family:inherit;line-height:1.05;letter-spacing:-.04em;color:#f3f6ff;text-shadow:0 0 9px rgba(var(--glow-rgb),.5);margin:.16em 0;font-size:clamp(24px,5.2cqw,56px)}
+.dos-banner p {margin:.35em 0;color:#b8c6d8;font-size:.86em}
+.dos-banner .crt-portrait {width:clamp(55px,13cqw,126px);flex:none;padding:0;border:0;background:none;box-shadow:none}
+.dos-banner .crt-screen {border:0;box-shadow:none;border-radius:0}.dos-banner .crt-bezel,.dos-banner .crt-hud {display:none}
+.dos-title {font-size:clamp(17px,3cqw,32px);margin:.6em 0}
+.dos-row {display:grid;grid-template-columns:minmax(9ch,13ch) 5ch 1fr;align-items:center;gap:1ch;padding:.38em .2em;color:#c7dbff;border-bottom:1px dotted #273249;text-decoration:none;text-shadow:0 0 4px rgba(var(--glow-rgb),.32)}
+.dos-row:hover,.dos-row:focus-visible {color:#050508;background:var(--accent-pale);text-shadow:none}
+.dos-row small {font-size:.78em}.dos-row span {font-size:.84em}
+.dos-form {border-bottom:0;border-top:1px solid #475574;padding-bottom:.3em}.dos-form label {max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.dos-form input {width:0;flex:1;border:0;color:#e4efff;background:#07090d;font:inherit;padding:.3em}
+.dos-msg {font-size:.78em;color:var(--accent-pale)}
+.dos-rack {display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.dos-rack .crt-color-control,.dos-rack .crt-field-toggle {position:static!important;inset:auto!important;transform:none}
+.dos-doc>.card,.dos-doc>.container,.dos-doc .lab-body,.dos-doc>.cert-card,.dos-doc>.lab-card {width:100%;max-width:none;margin:0;padding:10px;background:#050607;color:#dae6ff}
+.dos-doc .project {display:block}.dos-doc .project-video,.dos-doc video,.dos-photo {width:100%;max-width:100%}
+.dos-link {color:var(--accent-pale);text-decoration:underline}.dos-viewer,.dos-report {display:block;width:100%;height:55vh;border:0;background:#050507;margin-top:8px}
+.dos-doc>.dos-link {display:block;padding:.45em 0;overflow-wrap:anywhere}
+.dos-row b,.dos-title,.dos-doc {overflow-wrap:anywhere}
+.dos-album {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(145px,100%),1fr));gap:14px}.dos-album img{width:100%;height:95px;object-fit:contain;background:#000}.dos-album span,.dos-album small{display:block}
+.dos-rack button {cursor:pointer;background:#07080a;color:#d5deea;font:inherit;border:1px solid #52668b}
+.dos-wide .dos-station{width:100%;max-width:none}.dos-wide .sa-tv-frame{height:89svh}.dos-wide .sa-tv-screen{inset:0 1%;border-radius:22px}.dos-wide .sa-tv-frame::after,.dos-wide .sa-tv-deck,.dos-wide .sa-tv-slot{display:none}
+.dos-doc .archive-controls,.dos-doc .gallery-top,.dos-doc .archive-modes {flex-wrap:wrap}.dos-doc .memory-gallery{width:100%;min-width:0}
+.dos-tv .sa-tv-glass {background:repeating-linear-gradient(0deg,transparent 0 2px,#0002 2px 3px),linear-gradient(115deg,#bdceff0d,transparent 34%),radial-gradient(ellipse,transparent 60%,#0004);pointer-events:none}
+.dos-tv .sa-tv-glass::after {content:'';position:absolute;inset:0;background:linear-gradient(transparent 37%,#becdff10 50%,transparent 63%);animation:dos-sweep 9s ease-in-out infinite;pointer-events:none}
+@keyframes dos-sweep {0%,100%{transform:translateY(-60%)}65%{transform:translateY(70%)}}
+.crt-motion-off .dos-tv .sa-tv-glass::after {display:none}
+@media(prefers-reduced-motion:reduce){.dos-tv .sa-tv-glass::after{display:none}}
+@media(max-width:600px){.dos-station{padding:0 0 18px}.dos-tv .sa-tv-frame{height:calc(68svh + 46.33cqw)}.dos-row{grid-template-columns:1fr 5ch;padding:.45em 0}.dos-row span{grid-column:1/-1}.dos-banner small{letter-spacing:0}.dos-banner{padding:0}.dos-doc .gallery-top,.dos-doc .gallery-bottom{padding:5px}.dos-doc .gallery-stage{min-height:240px}.dos-rack{margin-top:10px}}
+@media print{.dos-home .dos-station,.dos-home .sa-tv,.dos-home .sa-tv-frame,.dos-home .sa-tv-screen,.dos-home .dos-tube,.dos-home .dos-scroll{position:static!important;display:block!important;width:auto!important;height:auto!important;overflow:visible!important;color:#111!important;background:white!important}.dos-home .sa-tv-frame::after,.dos-home .sa-tv-glass,.dos-home .sa-tv-deck,.dos-home .sa-tv-slot,.dos-home .dos-rack,.dos-home .dos-form,.dos-home .dos-msg,.dos-home .dos-bar button{display:none!important}.dos-row,.dos-title,.dos-label,.dos-total,.dos-location,.dos-banner h1,.dos-banner small{color:black!important;text-shadow:none!important}}
+@media(max-width:600px){
+ .dos-station{width:100%;padding:6px}.dos-tv .sa-tv-frame{height:76svh;border:5px ridge #323338;border-radius:28px;background:#030303}
+ .dos-tv .sa-tv-frame::after,.dos-tv .sa-tv-slot,.dos-tv .sa-tv-deck{display:none}.dos-tv .sa-tv-screen{inset:2px;border-radius:20px}
+ .dos-tube{font-size:16px;line-height:1.5}.dos-row span,.dos-row small,.dos-label,.dos-total,.dos-banner small,.dos-msg,.dos-meta,.dos-location,.dos-album small{font-size:14px}
+ .dos-row,.dos-tube button,.dos-rack button,.dos-rack a,.dos-form input{min-height:44px}
+ .dos-rack .crt-color-control{min-height:44px}.dos-banner .crt-portrait{width:67px}.dos-tv .sa-tv-glass{opacity:.38}
+ .dos-wide .dos-tv .sa-tv-frame{height:90svh;border-width:1px}.dos-wide .dos-tube{inset:1% 2%}
+}

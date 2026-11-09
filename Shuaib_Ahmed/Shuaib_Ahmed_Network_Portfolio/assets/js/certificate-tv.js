@@ -2,6 +2,7 @@
    is a shelf of tapes: drag one into the VCR slot to play it, or select it. The original cards remain for print
    and for browsers without JavaScript. */
 (() => {
+  if (document.body.classList.contains('dos-home')) return;
   'use strict';
   const section = document.querySelector('#certifications'), grid = section?.querySelector('.cert-grid');
   const certificates = window.PORTFOLIO_CERTIFICATES || [];
