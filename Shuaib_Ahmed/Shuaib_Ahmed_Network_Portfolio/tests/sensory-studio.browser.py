@@ -40,7 +40,9 @@ with sync_playwright() as pw:
   pg.locator('[data-mode='+mode+']').click();assert pc.get_attribute('data-mode')==mode
  pg.locator('[data-portrait-mic]').click();pg.wait_for_function('document.querySelector("[data-portrait-mic]").getAttribute("aria-pressed")==="true"')
  pc.evaluate('(c)=>window.beforeLoud=c.toDataURL()');pg.evaluate('fakeGain.gain.value=.7');pg.wait_for_timeout(300)
- assert pc.evaluate('c=>c.toDataURL()!==beforeLoud')
+ # Audio-context startup can vary on the deployed page; wait for the
+ # observable result instead of assuming it is ready after exactly 300 ms.
+ pg.wait_for_function('document.querySelector("[data-particle-canvas]").toDataURL()!==beforeLoud',timeout=4500)
  pg.wait_for_function("Number(document.querySelector('.studio-coords').textContent.split(' / IN ')[1])>15")
  pg.evaluate('fakeGain.gain.value=0');pg.wait_for_function("Number(document.querySelector('.studio-coords').textContent.split(' / IN ')[1])<3",timeout=4000)
  pg.locator('[data-portrait-mic]').click();assert pg.evaluate('testStream.getTracks().every(t=>t.readyState==="ended")')
